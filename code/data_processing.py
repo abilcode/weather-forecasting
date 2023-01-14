@@ -24,11 +24,17 @@ def data_processing(a,b,file):
     
     data2['time'] = pd.to_datetime(data2['time'])
     data2 = data2.set_index('time')
+    data2_max = data2.resample('D').max()
+    data2_max.columns = data2_max.columns + '_max'
+    data2_min = data2.resample('D').min()
+    data2_min.columns = data2_max.columns + '_min'
 
     ### Dropiing Missing Values
     data1=data1.dropna(thresh=11,axis=0)
     data1 = data1.drop('winddirection_10m_dominant (°)',axis=1)
-    merged=pd.merge(data1,data2, how='inner', left_index=True, right_index=True)
+    merged=pd.merge(data1,data2_max, how='inner', left_index=True, right_index=True)
+    merged=pd.merge(merged,data2_min, how='inner', left_index=True, right_index=True)
+    
     merged['month'] = merged.index.month
     merged['rainy'] = merged['month'].copy()
     rain_season = [10,11,12,1,2,3,4]
