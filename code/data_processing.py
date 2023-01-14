@@ -27,7 +27,7 @@ def data_processing(a,b,file):
     data2_max = data2.resample('D').max()
     data2_max.columns = data2_max.columns + '_max'
     data2_min = data2.resample('D').min()
-    data2_min.columns = data2_max.columns + '_min'
+    data2_min.columns = data2.columns + '_min'
 
     ### Dropiing Missing Values
     data1=data1.dropna(thresh=11,axis=0)
