@@ -13,15 +13,15 @@ def seperate_city(data,file='file.csv'):
 
 if __name__ == "__main__":
 
-    train = pd.read_csv('/Users/abilfad/Downloads/weather-forecasting-datavidia/data/train.csv')
+    train = pd.read_csv('../weather-forecasting-datavidia/data/train.csv')
     train['time'] = pd.to_datetime(train['time'])
-    train_hourly = pd.read_csv('/Users/abilfad/Downloads/weather-forecasting-datavidia/data/train_hourly.csv')
+    train_hourly = pd.read_csv('../weather-forecasting-datavidia/data/train_hourly.csv')
     train_hourly['time'] = pd.to_datetime(train_hourly['time'])
 
     train = train.set_index('time')
     train_hourly = train_hourly.set_index('time')
 
     print('Seperating city started!')
-    seperate_city(train_hourly,'/Users/abilfad/Downloads/weather-forecasting-datavidia/data/train_per_city')
+    seperate_city(train_hourly,'../weather-forecasting-datavidia/data/train_per_city')
     print('Finished!')
     #seperate_city(train_hourly)
