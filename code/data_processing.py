@@ -30,32 +30,39 @@ def data_processing(a,b,file):
     data1 = data1.drop('winddirection_10m_dominant (°)',axis=1)
     merged=pd.merge(data1,data2, how='inner', left_index=True, right_index=True)
     merged['month'] = merged.index.month
-    merged['month'] = merged.index.year
+    merged['rainy'] = merged['month'].copy()
+    rain_season = [10,11,12,1,2,3,4]
+    merged['rainy'] = merged['rainy'].isin(rain_season)
+    merged['year'] = merged.index.year
     merged.to_csv(f'{file}/merged_{data1.city.unique()}.csv')
 
 if __name__ == "__main__":
     
     print("Data Processing Started!")
     ### get to know the data :
-    dir_ = '../data'
+    dir_ = '../weather-forecasting-datavidia/data'
     for dirpath, dirname, filename in os.walk(dir_+'/per_city'):
+        print(f"There are {len(dirname)} directories and {len(filename)} file in '{dirpath}'.")
+    for dirpath, dirname, filename in os.walk(dir_+'/train_per_city'):
         print(f"There are {len(dirname)} directories and {len(filename)} file in '{dirpath}'.")
     entries = os.listdir(dir_+'/per_city')
     entries.sort()
     entries_hourly = os.listdir(dir_+'/train_per_city')
     entries_hourly.sort()
-    #print(entries)
-    #print(entries_hourly)
+    print(entries)
+    print(entries_hourly)
     for i in range(len(entries)):
         print('===+++==='*10)
         print(f"{dir_}/per_city/{entries[i]}")
         print(f"{dir_}/train_per_city/{entries_hourly[i]}")
         df = pd.read_csv(f'{dir_}/per_city/{entries[i]}')
         df_ = pd.read_csv(f'{dir_}/train_per_city/{entries_hourly[i]}')
-        data_processing(df,df_,file='../data/merged')
+        data_processing(df,df_,file='../weather-forecasting-datavidia/data/merged')
         print(f'{entries[i]} df has been merged!')
         print('===+++==='*10)
     print("Data have been proceeded!")
+   
+    
    
 
 
