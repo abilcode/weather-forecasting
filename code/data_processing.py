@@ -40,30 +40,30 @@ def data_processing(a,b,file):
     rain_season = [10,11,12,1,2,3,4]
     merged['rainy'] = merged['rainy'].isin(rain_season)
     merged['year'] = merged.index.year
-    merged.to_csv(f'{file}/merged_{data1.city.unique()}.csv')
+    merged.to_csv(f'{file}/merged_test{data1.city.unique()}.csv')
 
 if __name__ == "__main__":
     
     print("Data Processing Started!")
     ### get to know the data :
     dir_ = '../weather-forecasting-datavidia/data'
-    for dirpath, dirname, filename in os.walk(dir_+'/per_city'):
+    for dirpath, dirname, filename in os.walk(dir_+'/test_data'):
         print(f"There are {len(dirname)} directories and {len(filename)} file in '{dirpath}'.")
-    for dirpath, dirname, filename in os.walk(dir_+'/train_per_city'):
+    for dirpath, dirname, filename in os.walk(dir_+'/test_hourly'):
         print(f"There are {len(dirname)} directories and {len(filename)} file in '{dirpath}'.")
-    entries = os.listdir(dir_+'/per_city')
+    entries = os.listdir(dir_+'/test_data')
     entries.sort()
-    entries_hourly = os.listdir(dir_+'/train_per_city')
+    entries_hourly = os.listdir(dir_+'/test_hourly')
     entries_hourly.sort()
     print(entries)
     print(entries_hourly)
     for i in range(len(entries)):
         print('===+++==='*10)
-        print(f"{dir_}/per_city/{entries[i]}")
-        print(f"{dir_}/train_per_city/{entries_hourly[i]}")
-        df = pd.read_csv(f'{dir_}/per_city/{entries[i]}')
-        df_ = pd.read_csv(f'{dir_}/train_per_city/{entries_hourly[i]}')
-        data_processing(df,df_,file='../weather-forecasting-datavidia/data/merged')
+        print(f"{dir_}/test_data/{entries[i]}")
+        print(f"{dir_}/test_hourly/{entries_hourly[i]}")
+        df = pd.read_csv(f'{dir_}/test_data/{entries[i]}')
+        df_ = pd.read_csv(f'{dir_}/test_hourly/{entries_hourly[i]}')
+        data_processing(df,df_,file='../weather-forecasting-datavidia/data/merged_test')
         print(f'{entries[i]} df has been merged!')
         print('===+++==='*10)
     print("Data have been proceeded!")
