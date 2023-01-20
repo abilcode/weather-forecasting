@@ -60,9 +60,9 @@ def model_search(data,n,city):
             for i in range(100):
                 y_pred = xgb_cv.predict(x_test)
                 pbar.update(1)
-       
+        print("Before:",np.mean(scaler.inverse_transform(y_pred.reshape(1, -1))),np.mean(scaler.inverse_transform(y_test.reshape(1, -1))))
         y_pred = np.array([0 if x < 0 else x for x in y_pred])
-        
+        print("After:",np.mean(scaler.inverse_transform(y_pred.reshape(1, -1))),np.mean(scaler.inverse_transform(y_test.reshape(1, -1))))
         print(sklearn.metrics.mean_squared_error(scaler.inverse_transform(y_test.reshape(1, -1)), scaler.inverse_transform(y_pred.reshape(1, -1))))
         print("------------------------------------------------------------")
     
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     #data_.drop(['time','sunrise (iso8601)', 'sunset (iso8601)', 'city_max', 'city_min'],axis=1,inplace=True)
     city_obj = ['su','si','u','le','p','lh','b','t','sa','q']
     for c in city_obj :
-        print('=='*14,c,'=='*14)
-        model_search(data_[data_['city']==c],30,c)
+        print('=='*14,'si','=='*14)
+        model_search(data_[data_['city']=='si'],30,'si')
     
     

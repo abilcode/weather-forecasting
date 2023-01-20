@@ -41,12 +41,13 @@ def model_search(data,n,city):
     lgb =  lightgbm.LGBMRegressor(random_state=0)
     grid_lgb = {'subsample': [0.6, 0.7, 0.8, 0.9, 1.0],
                 'n_estimators' : [900, 1100, 1300, 1500, 2000, 2500, 3000,3500],
-                'learning_rate' : [0.01, 0.025, 0.05, 0.1,0.2,0.3],
+                'learning_rate' : [0.01, 0.025, 0.05, 0.1, 0.2, 0.25, 0.3],
                 'max_depth':[7,9,11,15],
                 'min_child_weight': [1,3,5,7,9],
                 'reg_lambda': [0.01, 0.03, 0.05, 0.07, 0.1, 0.5, 1.0],
                 'colsample_bytree': [0.6, 0.8, 1.0],
-                'reg_alpha': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]} 
+                'reg_alpha': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+                'reg_lambda':[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]} 
     print('mean',mean)
     tscv = sklearn.model_selection.TimeSeriesSplit(n_splits=5)
     lgb_cv = sklearn.model_selection.RandomizedSearchCV(lgb, grid_lgb, scoring = 'neg_mean_squared_error',cv=tscv, n_jobs=-1,n_iter=50)
