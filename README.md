@@ -2,7 +2,7 @@
 Elimination Round Datavidia Repo
 
 ## Report :
-Please go to this <a href="https://github.com/abilcode/earthquake-prediction/blob/main/Ayam%20Girang_Makalah_Prediksi%20Waktu%20Kedatangan%20Gempa%20Bumi%20Berdasarkan%20Seismogram%20Dengan%20Pembelajaran%20Mesin%20Berbasis%20Pohon.pdf">link</a>
+Please go to this <a href="https://github.com/abilcode/weather-forecasting/blob/master/Laporan%20Penyisihan_Ayam%20Girang_Revisi%2001.pdf">link</a>
 
 ## Setup
 
